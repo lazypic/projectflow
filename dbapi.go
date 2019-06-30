@@ -107,8 +107,10 @@ func AddProject(db dynamodb.DynamoDB) error {
 		ID:            *flagID,
 		Budget:        *flagBudget,
 		StartDate:     *flagStartDate,
+		UpdateDate:    *flagUpdateDate,
 		EndDate:       *flagEndDate,
 		ProjectStatus: *flagProjectStatus,
+		MonetaryUnit:  *flagMonetaryUnit,
 	}
 
 	dynamodbJSON, err := dynamodbattribute.MarshalMap(p)
@@ -206,15 +208,9 @@ func GetProjects(db dynamodb.DynamoDB, word string) error {
 		expression.Name("ProjectStatus"),
 	)
 	filt1 := expression.Name("ID").Contains(word)
-	filt2 := expression.Name("ProjectStatus").Contains(word)
-	filt3 := expression.Name("StartDate").Contains(word)
-	filt4 := expression.Name("EndDate").Contains(word)
 
 	expr, err := expression.NewBuilder().
 		WithFilter(filt1).
-		WithFilter(filt2).
-		WithFilter(filt3).
-		WithFilter(filt4).
 		WithProjection(proj).
 		Build()
 	if err != nil {

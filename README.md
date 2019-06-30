@@ -35,7 +35,7 @@ $ projectflow -search [검색어]
 
 - region: 기본값 "ap-northeast-2", AWS 리전명
 - profile: 기본값 "lazypic", AWS Credentials profile 이름
-- table: 기본값 "userflow", AWS Dynamodb tablbe 이름
+- table: 기본값 "projectflow", AWS Dynamodb tablbe 이름
 
 #### 모드
 - add: add mode on
