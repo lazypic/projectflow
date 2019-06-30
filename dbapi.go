@@ -208,9 +208,11 @@ func GetProjects(db dynamodb.DynamoDB, word string) error {
 		expression.Name("ProjectStatus"),
 	)
 	filt1 := expression.Name("ID").Contains(word)
+	filt2 := expression.Name("StartDate").Contains(word)
+	filt3 := expression.Name("EndDate").Contains(word)
 
 	expr, err := expression.NewBuilder().
-		WithFilter(filt1).
+		WithFilter(filt1.Or(filt2).Or(filt3)).
 		WithProjection(proj).
 		Build()
 	if err != nil {
