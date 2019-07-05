@@ -1,12 +1,10 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
 	"log"
 	"os"
-	"os/user"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -24,7 +22,6 @@ var (
 	// mode and partition key
 	flagAdd = flag.Bool("add", false, "user addition mode")
 	flagSet = flag.Bool("set", false, "user update mode")
-	flagRm  = flag.Bool("rm", false, "user remove mode")
 
 	// date
 	flagHelp = flag.Bool("help", false, "print help")
@@ -74,16 +71,6 @@ func main() {
 		}
 	} else if *flagSet && *flagID != "" {
 		err := SetProject(*db)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "%v\n", err)
-			os.Exit(1)
-		}
-	} else if *flagRm && *flagID != "" {
-		user, err := user.Current()
-		if user.Username != "root" {
-			log.Fatal(errors.New("사용자를 삭제하기 위해서는 root 권한이 필요합니다"))
-		}
-		err = RmProject(*db)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%v\n", err)
 			os.Exit(1)

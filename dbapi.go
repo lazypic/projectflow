@@ -179,23 +179,6 @@ func SetProject(db dynamodb.DynamoDB) error {
 	return nil
 }
 
-// RmProject 는 프로젝트 자료구조를 사용자를 삭제하는 함수이다.
-func RmProject(db dynamodb.DynamoDB) error {
-	input := &dynamodb.DeleteItemInput{
-		TableName: aws.String(*flagTable),
-		Key: map[string]*dynamodb.AttributeValue{
-			partitionKey: {
-				S: aws.String(*flagID),
-			},
-		},
-	}
-	_, err := db.DeleteItem(input)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
 // GetProjects 는 사용자를 가지고오는 함수이다.
 func GetProjects(db dynamodb.DynamoDB, word string) error {
 	proj := expression.NamesList(

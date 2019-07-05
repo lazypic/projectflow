@@ -17,12 +17,6 @@ Project 수정
 $ projectflow -set -id circle -status backup
 ```
 
-Project 삭제
-
-```bash
-$ sudo projectflow -rm -id [projctname]
-```
-
 Project 검색
 
 ```bash
@@ -40,7 +34,6 @@ $ projectflow -search [검색어]
 #### 모드
 - add: add mode on
 - set: set mode on
-- rm: rm mode on
 
 #### 속성
 - id: 프로젝트 코드명
@@ -84,7 +77,6 @@ AWS DB접근 권한을 설정할 계정에 아래 권한을 부여합니다.
                 "dynamodb:Scan",
                 "dynamodb:BatchWrite*",
                 "dynamodb:CreateTable",
-                "dynamodb:Delete*",
                 "dynamodb:Update*",
                 "dynamodb:PutItem"
             ],
